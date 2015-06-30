@@ -1,6 +1,6 @@
 #Agent080
 ===
-這是抓取Name080網站 DNS服務。只要有購買Name080 DNS代管服務,就適用此腳本來抓取Hostname及IP相關資料。
+這是Bash Script 撰寫, 主要是抓取Name080網站 DNS服務上的資料。只要有購買Name080 DNS代管服務,就適用此腳本來抓取Hostname及IP相關資料。
 
 ##How to Work
 1.只要修改Script 內容  loginID及passw (在Name080 註冊的帳號及密碼)
