@@ -5,8 +5,8 @@ DomainNamePage="DomainIndexT.txt";
 SubDomainIP="SubDomainIP.html";
 recordPage="recordPage.html";
 storePage="StorePage.txt";
-loginID="qbox";
-passw="Jc284n";
+loginID="your ID";
+passw="Your Password";
 
 function CheckArg() {
         if [ $# -eq 0 ];then
