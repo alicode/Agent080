@@ -9,6 +9,7 @@
 2.sh Agent080 -g
 
 3.若是第一次執行會詢問 "The DomainIndex.txt is not exist. Need Rebuild Domain Index. Please Input  Y/N:",只要鍵入 "Y"就可以抓資料。
+
 4.sh Agent080 -h  About Help  
 
 
