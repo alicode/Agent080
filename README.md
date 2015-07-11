@@ -15,6 +15,30 @@
 ##History
 
 
+**v2.0** / (2015-07-11)
+ 
+  - 增加  "新增AddSubDomain  "功能,此功能是 依據 "modifily" 功能 修正的。
+
+  - 未來要增加  同步 DomainBase 的功能。
+
+**v2.0** / (2015-07-06)
+
+  - 測試 使用 一個 session 對應一個 DomainName
+
+  - 目前小量測試 8個  subdomain (2個 Doamin ; 每一個Domain 4個 SubDomain),時間 花費 49 S ,DNS 沒有跟不上的情況)
+
+**v2.0** / (2015-06-18)
+
+  - 修改 遺漏變數名稱。
+
+  - 測試 多個session (一台電腦一個session)執行Agent080.sh,比之前穩定一些,測6個(2個session)subdomain 都沒問題;測15個(3個session)都有一個會無法更新到DNS。
+
+  - 以下是測試時,並未更新的 DomainName
+
+    1.kk1.bs2828.com
+
+    2.kk9.bs2828.com
+
 **v2.0** / (2015-06-17)
 
   - 新增 單一筆 SubdomainName 刪除的功能
