@@ -32,6 +32,9 @@ function logoutPass(){
 
 #curl -d "id=81501&domain_id=18614&record_id=32996096&name=ddt&content=50.115.35.28&null=&ttl=360"  -b 080DomainAuto.txt  -k https://name.080.net/domain/member/domain_manager/md_ip_eip/18614/81501
 
+function getStrDomain(){
+	echo "$1"|sed -rn 's/^(([0-9a-z]){1,}\.)(.*)/\3/p';
+}
 
 function getDomainList(){
 	#get web pages for https://name.080.net/domain/member/center
@@ -137,6 +140,33 @@ modiflyDomain $mArg $DomainID $SubDomainID
 echo ""
 done < $1
 }
+
+
+function AddSubDomain2(){
+	curl -d "$1"  -b 080DomainAuto.txt  -k https://name.080.net/domain/member/domain_manager/md_ip_eip/$2
+}
+
+function AddSubDomain(){
+#myselfList  DomainList 
+while read AddHostname AddHostIP
+do
+List="";
+echo "===$AddHostname===";
+#List=$(awk '{if($5=="'$AddHostname'") print $5}' $2);
+List=$(dig +answer +noquestion +nocomments +nostats +nocmd $AddHostname @8.8.8.8|awk '{print $4}');
+if [  "$List" != "A" ];then
+	DomainID=$(awk '{if($1=="'$(getStrDomain $AddHostname)'") print $2}' $2)	
+	name=$(echo "$AddHostname"|cut -d"." -f1);
+   else
+	echo "It is exist for $AddHostname";
+fi
+mArg="id=&domain_id=$DomainID&record_id=&name=$name&content=$AddHostIP&ttl=360";
+echo $mArg
+AddSubDomain2 $mArg $DomainID
+echo ""
+done < $1
+}
+
 function checkforT(){
         chkArg=$(ps aux|grep -i curl|wc -l);
         if [ $chkArg -gt 1 ];then
@@ -157,15 +187,20 @@ function checkFile(){
 
 CheckArg $@
 FileName="noneFile";
+ADDFileName="noneFile";
 DomainList="noneFile";
 SubDomainClear="noneFile";
 
-while getopts "W:D:d:gih"  options
+while getopts "W:A:D:d:gih"  options
 do
         case $options in
                 "W")
                 FileName=$OPTARG
 		checkFile $FileName;
+                ;;
+                "A")
+                ADDFileName=$OPTARG
+		checkFile $ADDFileName;
                 ;;
                 "D")
                 DomainList=$OPTARG
@@ -230,6 +265,16 @@ done
 if [ $FileName != "noneFile" -a $DomainList != "noneFile" ];then
 	loginPass	
 	modifily $FileName $DomainList
+	#sleep 1
+	logoutPass
+	exit 0
+#	echo "$FileName :  $DomainList";
+
+fi
+
+if [ $ADDFileName != "noneFile" -a $DomainList != "noneFile" ];then
+	loginPass	
+	AddSubDomain $ADDFileName $DomainList
 	#sleep 1
 	logoutPass
 	exit 0

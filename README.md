@@ -12,6 +12,16 @@
 
 4.sh Agent080 -h  About Help  
 
+##History
+
+
+**v2.0** / (2015-06-12)
+  -目前修改與 Get Data 合為一版 。(測試版)
+  -未來取資料,以 單一筆DomainIndex來取(功能增加)
+  -未來能update DomainDB(File)的功能,不必每次都從第一筆開始到最後一筆。
+**v1.0** / (2014-09-22)
+  -初稿  Get Data
+
 
 
 
