@@ -12,6 +12,7 @@ function CheckArg() {
         if [ $# -eq 0 ];then
         echo "
 example: sh $0  -W FileName  -D DomainNameBase	      ===>Modify IP of Hostname within   Batch Way
+example: sh $0  -A FileName  -D DomainNameBase	      ===>Add  Subdomain and IP  within   Batch Way
 example: sh $0  -d subdomainName  -D DomainNameBase   ===>Delete SubdomainName
 example: sh $0  -g 				      ===>Gat Data
 example: sh $0  -i 				      ===>Rebuild Domain Index
@@ -133,6 +134,8 @@ SubDomainID=$(echo $List|awk '{print $3}');
 RecordID=$(echo $List|awk '{print $4}');
 name=$(echo $List|awk '{print $5}'|cut -d"." -f1);
 #echo "id=$SubDomainID&domain_id=$DomainID&record_id=$RecordID&name=$name&content=$MathHostIP&null&ttl=360";
+checkStr=$(echo "$List"|awk '{if($1=="'$MathHostname'") print "DomainName"}')
+if [ "$checkStr" == "DomainName" ];then name="";fi 
 mArg="id=$SubDomainID&domain_id=$DomainID&record_id=$RecordID&name=$name&content=$MathHostIP&null&ttl=360";
 #mArg="id=$SubDomainID&domain_id=$DomainID&record_id=$RecordID&name=$name&content=$MathHostIP&null&ttl=60";
 echo $mArg
@@ -155,7 +158,7 @@ echo "===$AddHostname===";
 #List=$(awk '{if($5=="'$AddHostname'") print $5}' $2);
 List=$(dig +answer +noquestion +nocomments +nostats +nocmd $AddHostname @8.8.8.8|awk '{print $4}');
 if [  "$List" != "A" ];then
-	DomainID=$(awk '{if($1=="'$(getStrDomain $AddHostname)'") print $2}' $2)	
+	DomainID=$(awk '{if($1=="'$(getStrDomain $AddHostname)'") print $2}' $2|uniq)	
 	name=$(echo "$AddHostname"|cut -d"." -f1);
    else
 	echo "It is exist for $AddHostname";

@@ -15,6 +15,14 @@
 ##History
 
 
+**v2.0** / (2015-07-25)
+  - Fix modifily  Bug    (DomainName 修改錯誤; ex:abc.com 會變成錯誤  abc.abc.com)
+
+  - Fix AddSubDomain Bug (重覆 DomainID)
+
+  - 增加 AddSubDomain  提示訊息 
+
+
 **v2.0** / (2015-07-11)
  
   - 增加  "新增AddSubDomain  "功能,此功能是 依據 "modifily" 功能 修正的。
