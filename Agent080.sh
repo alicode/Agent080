@@ -23,7 +23,6 @@ example: sh $0  -h
 }
 
 
-#curl -d "t_username=admin4dns&t_password=Ali7701031!" -D 080DomainAuto.txt -e "http://name.080.net/" -k https://name.080.net/domain/user/login
 function loginPass(){
 	curl -d "t_username=$loginID&t_password=$passw" -D 080DomainAuto.txt -e "http://name.080.net/" -k https://name.080.net/domain/user/login
 }
